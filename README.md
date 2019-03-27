@@ -11,14 +11,19 @@ MODULE myModule
   IMPLICIT NONE
   PRIVATE
   PUBLIC :: myType
-  PUBLIC :: IndentIfThenElse
-  PUBLIC :: IndentOneLineKeywords
+  PUBLIC :: indent
+  PUBLIC :: indentOneLineKeywords
 
   TYPE :: myType
     INTEGER :: myInt = 0
   CONTAINS
     PROCEDURE, PUBLIC :: myTypeSub
   END TYPE
+
+  INTERFACE indent
+    PROCEDURE indent
+    PROCEDURE indentIfThenElse
+  END INTERFACE
 CONTAINS
   SUBROUTINE myTypeSub(this)
     IMPLICIT NONE
@@ -28,11 +33,11 @@ CONTAINS
     myType%myInt = 10
   END SUBROUTINE myTypeSub
 
-  SUBROUTINE IndentIfThenElse(i, j)
+  SUBROUTINE indentIfThenElse(i, j)
     IMPLICIT NONE
 
     INTEGER, INTENT(IN) :: i
-    INTEGER, INTENT(OUT) :: j
+    INTEGER, INTENT(INOUT) :: j
 
     IF (i > 10) THEN
       j = i
@@ -41,18 +46,38 @@ CONTAINS
     ELSE
       j = -1
     END IF
-  END SUBROUTINE IndentIfThenElse
+  END SUBROUTINE indentIfThenElse
 
-  SUBROUTINE IndentOneLineKeywords(i, j)
+  SUBROUTINE indentSelectCase(i, j)
+    IMPLICIT NONE
+
+    INTEGER, INTENT(IN) :: i
+    INTEGER, INTENT(INOUT) :: j
+
+    SELECT CASE (i)
+    CASE (10)
+      j = 2 * i
+    CASE (6)
+      j = i
+    CASE DEFAULT
+      j = -1
+    END SELECT
+  END SUBROUTINE indentSelectCase
+
+  SUBROUTINE indentOneLineKeywords(i, j)
     IMPLICIT NONE
 
     INTEGER, INTENT(IN) :: i(:)
-    INTEGER, INTENT(OUT) :: j(:)
+    INTEGER, INTENT(INOUT) :: j(:)
 
     IF (ALL(i > 10)) j = i
 
     WHERE (i > 10) &
       j = i
-  END SUBROUTINE IndentOneLineKeywords
+
+    IF (SIZE(j) >= 4) &
+      FORALL (INTEGER :: k = 1:4) &
+        j(k) = 1
+  END SUBROUTINE indentOneLineKeywords
 END MODULE myModule
 ```
