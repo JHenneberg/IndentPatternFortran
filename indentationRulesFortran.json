@@ -1,6 +1,6 @@
 {
   "indentationRules": {
-    "increaseIndentPattern": "",
-    "decreaseIndentPattern": ""
+    "increaseIndentPattern": "(?ix)^\\s*((block\\s*data|contains|program|submodule)\\b|((?!end\\b)[^\\\"'!])*\\b(function|subroutine)\\b|module\\b(?!\\s+procedure\\b)|type(?!\\s*(\\(|\\=))|(abstract\\s+)?interface\\b|([a-z]\\w*\\s*:\\s*)?((associate|block|critical|do|forall.*then)\\b|if\\b.*\\bthen\\b|select\\s*(case|type)\\b|where\\b(?!\\s*\\(.*\\)\\s*[a-z]))|(case)\\b|(class|type)\\s+is\\b|else(if|where)?\\b)",
+    "decreaseIndentPattern": "(?ix)^\\s*((case|contains)\\b|(class|type)\\s+is\\b|end(do|forall|function|if|interface|module|program|select|submodule|subroutine|type|where)?\\b|else(if|where)?\\b)"
   }
 }
