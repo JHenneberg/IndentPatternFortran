@@ -3,8 +3,9 @@ MODULE myModule
   IMPLICIT NONE
   PRIVATE
   PUBLIC :: myType
-  PUBLIC :: indent
+  PUBLIC :: indentInterface
   PUBLIC :: indentOneLineKeywords
+  PUBLIC :: SubroutineTest
 
   TYPE :: myType
     INTEGER :: myInt = 0
@@ -12,10 +13,10 @@ MODULE myModule
     PROCEDURE, PUBLIC :: myTypeSub
   END TYPE
 
-  INTERFACE indent
+  INTERFACE indentInterface
     PROCEDURE indent
     PROCEDURE indentIfThenElse
-  END INTERFACE
+  END INTERFACE indentInterface
 CONTAINS
   SUBROUTINE myTypeSub(this)
     IMPLICIT NONE
@@ -71,4 +72,14 @@ CONTAINS
       FORALL (INTEGER :: k = 1:4) &
         j(k) = 1
   END SUBROUTINE indentOneLineKeywords
+  
+  SUBROUTINE SubroutineTest(subroutine, end)
+    IMPLICIT NONE
+    
+    INTEGER, INTENT(INOUT) :: subroutine123, end123
+    
+    subroutine123 = end123
+    end123 = subroutine123
+    
+  END SUBROUTINE SubroutineTest
 END MODULE myModule
