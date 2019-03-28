@@ -73,12 +73,14 @@ CONTAINS
         j(k) = 1
   END SUBROUTINE indentOneLineKeywords
   
-  SUBROUTINE SubroutineTest(subroutine, end)
+  SUBROUTINE SubroutineTest(subroutine123, subroutine456, end)
     IMPLICIT NONE
     
     INTEGER, INTENT(INOUT) :: subroutine123, end123
+    INTEGER, INTENT(INOUT) :: subroutine456(10)
     
     subroutine123 = end123
+    subroutine(10) = end123
     end123 = subroutine123
     
   END SUBROUTINE SubroutineTest
